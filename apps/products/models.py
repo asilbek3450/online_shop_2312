@@ -23,8 +23,8 @@ class Product(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, null=True, blank=True)
     description = models.TextField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    discount_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    price = models.FloatField()
+    discount_price = models.FloatField(null=True, blank=True)
     stock = models.PositiveIntegerField()
     available = models.BooleanField(default=True)
     views = models.PositiveIntegerField(default=0)
@@ -37,6 +37,7 @@ class Product(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name.lower())
+        self.discount_price = self.price * 0.9
         super().save(*args, **kwargs)
 
     def get_images(self):
