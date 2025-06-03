@@ -18,5 +18,16 @@ class ShopPageView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
         context['products'] = Product.objects.filter(available=True).order_by('-id')
+        
         return context
     
+    
+class ProductDetailView(TemplateView):
+    template_name = 'single-product.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        product_id = self.kwargs.get('id')
+        context['product'] = Product.objects.get(id=product_id)
+        context['images'] = ProductImage.objects.filter(product_id=product_id)
+        return context

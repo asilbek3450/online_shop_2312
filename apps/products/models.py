@@ -41,14 +41,18 @@ class Product(models.Model):
         super().save(*args, **kwargs)
 
     def get_images(self):
-        images = ProductImage.objects.filter(product=self)
-        return images
+        image_urls = []
+        image_urls.extend(ProductImage.objects.filter(product=self).image_file.url)
+        return image_urls
     
     def get_cover_image(self):
         images = self.get_images()
         if images.exists():
             return images.first().image_file.url
         return None
+    
+    def get_reviews(self):
+        return Review.objects.filter(product=self).order_by('-created_at')
 
 
 class ProductImage(models.Model):
