@@ -24,11 +24,11 @@
 	<div class="product_image_area">
 		<div class="container">
 			<div class="row s_product_inner">
-				<div class="col-lg-6">
+				<div class="col-lg-6" style="display: inline;">
 					<div class="s_Product_carousel">
-						{% for image in image_urls %}
+						{% for image in images %}
 						<div class="single-prd-item">
-							<img class="img-fluid" src="{{ image }}" alt="">
+							<img class="img-fluid" src="{{ image.image_file.url }}" alt="">
 						</div>
 						{% endfor %}
 					</div>

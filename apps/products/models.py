@@ -39,13 +39,10 @@ class Product(models.Model):
             self.slug = slugify(self.name.lower())
         self.discount_price = self.price * 0.9
         super().save(*args, **kwargs)
-
-    def get_images(self):
-        return ProductImage.objects.filter(product=self)
-    
+   
     
     def get_cover_image(self):
-        images = self.get_images()
+        images = ProductImage.objects.filter(product=self)
         if images.exists():
             return images[0].image_file.url
     
