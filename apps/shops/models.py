@@ -10,7 +10,7 @@ class Cart(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Cart #{self.id} - {self.user.username}"
+        return f"Cart #{self.pk} - {self.user.username}"
 
 
 # CartItem
@@ -42,7 +42,7 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Order #{self.id} by {self.user.username}"
+        return f"Order #{self.pk} by {self.user.username}"
 
 
 # OrderItem
@@ -52,7 +52,7 @@ class OrderItem(models.Model):
     quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):
-        return f"{self.quantity} x {self.product.name} in Order #{self.order.id}"
+        return f"{self.quantity} x {self.product.name} in Order #{self.order.pk}"
     
     def get_price(self):
         return self.product.price * self.quantity
@@ -78,7 +78,7 @@ class Payment(models.Model):
     paid_at = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
-        return f"Payment for Order #{self.order.id}"
+        return f"Payment for Order #{self.order.pk}"
 
 
 # Wishlist
