@@ -177,8 +177,3 @@ cython_debug/
 *.db
 # SQLite database files
 *.sqlite3
-
-media/
-./media
-/media
-media
